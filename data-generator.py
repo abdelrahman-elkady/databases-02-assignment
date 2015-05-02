@@ -24,7 +24,7 @@ for i in range(0,58960):
 
 for i in range(0,118):
     random_index = randint(0,58959)
-    records[random_index][0] = "pele"
+    records[random_index][1] = "pele"
 
 with open("data-played-in.csv", "wb") as file:
     writer = csv.writer(file)

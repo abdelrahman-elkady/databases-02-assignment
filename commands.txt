@@ -1,1 +1,3 @@
 COPY cup_matches(round, year, num_ratings, rating) FROM '/full/path/to/data' DELIMITER ',' CSV;
+
+COPY played_in(mid, name, year, position) FROM '/full/path/to/data' DELIMITER ',' CSV;
