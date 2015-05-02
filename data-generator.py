@@ -1,4 +1,5 @@
 from random import randint
+from random import uniform
 import csv
 
 # some random names to select from !
@@ -7,13 +8,14 @@ names = ["Adam Nilson", "William  Phillips", "Stephen  Garcia", "Jeffrey  Patter
 
 records = []
 
-for i in range(0,58960):
+# played_in table mock
+for i in range(0, 58960):
     record = []
 
-    random_index = randint(0,99)
-    random_mid = randint(1,2860)
-    random_year = randint(1980,2015)
-    random_position = randint(1,16)
+    random_index = randint(0, 99)
+    random_mid = randint(1, 2860)
+    random_year = randint(1980, 2015)
+    random_position = randint(1, 16)
 
     record.append(random_mid)
     record.append(names[random_index])
@@ -22,10 +24,37 @@ for i in range(0,58960):
 
     records.append(record)
 
-for i in range(0,118):
-    random_index = randint(0,58959)
+for i in range(0, 118):
+    random_index = randint(0, 58959)
     records[random_index][1] = "pele"
 
 with open("data-played-in.csv", "wb") as file:
+    writer = csv.writer(file)
+    writer.writerows(records)
+
+# cup_matches table mock
+
+# to not mess with scary references !
+records[:] = []
+
+# len(rounds) = 5
+rounds = ['32nd', '16th', 'Quarter Final', 'Semi Final', 'Final']
+
+for i in range(0, 2680):
+    record = []
+
+    random_index = randint(0, 4)
+    random_year = randint(1980, 2015)
+    random_viewers = randint(20000, 90000)
+    random_avg_rating = round(uniform(1, 10), 1)
+
+    record.append(rounds[random_index])
+    record.append(random_year)
+    record.append(random_viewers)
+    record.append(random_avg_rating)
+
+    records.append(record)
+
+with open("data-cup-matches.csv", "wb") as file:
     writer = csv.writer(file)
     writer.writerows(records)
