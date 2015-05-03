@@ -62,3 +62,20 @@ CREATE INDEX year_index_played_in ON played_in(year);
 SET enable_seqscan = OFF ;
 
 EXPLAIN SELECT * from cup_matches, played_in WHERE cup_matches.year=played_in.year;
+
+
+-- E.1
+
+EXPLAIN SELECT * FROM cup_matches, played_in WHERE cup_matches.mid=played_in.mid;
+
+-- E.2
+
+SET enable_hashjoin = OFF ;
+
+EXPLAIN SELECT * FROM cup_matches, played_in WHERE cup_matches.mid=played_in.mid;
+
+-- E.3
+
+SET enable_mergejoin = OFF;
+
+EXPLAIN SELECT * FROM cup_matches, played_in WHERE cup_matches.mid=played_in.mid;
