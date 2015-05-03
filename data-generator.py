@@ -1,5 +1,6 @@
 from random import randint
 from random import uniform
+
 import csv
 
 # cup_matches table mock
@@ -37,14 +38,20 @@ names = ["Adam Nilson", "William  Phillips", "Stephen  Garcia", "Jeffrey  Patter
 
 # to not mess with scary references !
 records[:] = []
+taken_keys = set()
 
 for i in range(0, 58960):
     record = []
 
-    random_index = randint(0, 99)
-    random_mid = randint(1, 2860)
-    random_year = randint(1980, 2015)
-    random_position = randint(1, 16)
+    while True:
+        random_index = randint(0, 99)
+        random_mid = randint(1, 2680)
+        random_year = randint(1980, 2015)
+        random_position = randint(1, 16)
+
+        if ((random_mid, names[random_index]) not in taken_keys):
+            taken_keys.add((random_mid, names[random_index]))
+            break
 
     record.append(random_mid)
     record.append(names[random_index])
@@ -53,8 +60,15 @@ for i in range(0, 58960):
 
     records.append(record)
 
+taken_keys = set()
 for i in range(0, 118):
-    random_index = randint(0, 58959)
+
+    while True:
+        random_index = randint(0, 58959)
+        if(records[random_index][0] not in taken_keys):
+            taken_keys.add(records[random_index][0])
+            break
+
     records[random_index][1] = "pele"
 
 with open("data-played-in.csv", "wb") as file:
